@@ -98,9 +98,13 @@ tree_labels <- function(model, uniform, ...){
   xy <- treeco(model, uniform = uniform)
   label <- model$frame$var
 	yval  <- model$frame$yval
-	sleft  <- model$frame$splits.cutleft
-  sright <- model$frame$splits.right
-
+	sleft  <- model$frame$splits[,1]
+	sright <- model$frame$splits[,2]
+	sleft <- stringr::str_replace(sleft, ":a", "TRUE")
+	sleft <- stringr::str_replace(sleft, ":b", "FALSE")
+	sright <- stringr::str_replace(sright, ":a", "TRUE")
+	sright <- stringr::str_replace(sright, ":b", "FALSE")
+	
   # Lines copied from tree:::treepl
   x <- xy$x
   y <- xy$y
@@ -109,7 +113,7 @@ tree_labels <- function(model, uniform, ...){
   sibling <- match(ifelse(node%%2, node - 1L, node + 1L), node)
 
 	# Extract labels
-  data <- data.frame(x=x, y=y, label=label)
+  data <- data.frame(x=x, y=y, label=label, label_full=stringr::str_c(label, sleft, sep = " "))
   data <- data[data$label != "<leaf>",]
 	labels <- as.data.frame(data)
 	
