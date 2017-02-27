@@ -100,10 +100,10 @@ tree_labels <- function(model, uniform, ...){
 	yval  <- model$frame$yval
 	sleft  <- model$frame$splits[,1]
 	sright <- model$frame$splits[,2]
-	sleft <- stringr::str_replace(sleft, ":a", "TRUE")
-	sleft <- stringr::str_replace(sleft, ":b", "FALSE")
-	sright <- stringr::str_replace(sright, ":a", "TRUE")
-	sright <- stringr::str_replace(sright, ":b", "FALSE")
+	sleft <- stringr::str_replace(sleft, ":a", "FALSE")
+	sleft <- stringr::str_replace(sleft, ":b", "TRUE")
+	sright <- stringr::str_replace(sright, ":a", "FALSE")
+	sright <- stringr::str_replace(sright, ":b", "TRUE")
 	
   # Lines copied from tree:::treepl
   x <- xy$x
